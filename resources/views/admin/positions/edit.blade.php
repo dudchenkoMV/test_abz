@@ -22,10 +22,15 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="name">Name:</label>
+                            <label for="name">
+                                @error('name')
+                                <i class="far fa-times-circle text-red"></i>
+                                @enderror
+                                {{ __('Name') }}
+                            </label>
                             <input class="form-control" type="text" id="name" name="name" value="{{ $position->name }}">
                             @error('name')
-                            <div class="alert alert-warning">{{ $message }}</div>
+                            <div class="text-danger text-sm-left">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">

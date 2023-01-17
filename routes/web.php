@@ -29,15 +29,11 @@ Route::get('/dashboard', function() {
 })->middleware('auth')->name('dashboard');
 
 Route::middleware('auth')->group(function() {
-
-
     Route::resource('employees', \App\Http\Controllers\EmployeController::class)->except(['show']);
     Route::resource('positions', \App\Http\Controllers\PositionController::class)->except(['show']);
-
-
 });
 
-Route::post('employees-datasource', [\App\Http\Controllers\EmployeController::class, 'paginate'])->name('employees.datasource');
+Route::post('employees-datatable', \App\Http\Controllers\Ajax\EmployeeDataTableContoller::class)->name('employees-datatable');
 
 
 Route::post('login', [\App\Http\Controllers\Auth\AuthController::class, 'login'])->name('login');

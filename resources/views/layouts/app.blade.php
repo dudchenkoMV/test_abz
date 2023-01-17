@@ -44,11 +44,11 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    url: 'employees-datasource',
+                    url: 'employees-datatable',
                     type: 'POST',
                 },
                 columns: [
-                    { data: 'photo', name: 'photo', orderable: false, searchable: false },
+                    { data: 'preview', name: 'preview', orderable: false, searchable: false },
                     { data: 'name', name: 'name' },
                     { data: 'position', name: 'position' },
                     { data: 'employment_at', name: 'employment_at', render: DataTable.render.moment('DD.MM.YY')},
@@ -126,6 +126,13 @@
             $('#photo_button').on('click', function() {
                $('#photo_input').click();
             });
+            $('#photo_input').on('change', function() {
+                $('#photo_caption').text('');
+                if (this.files.length > 0) {
+                    $('#photo_caption').text(this.files[0].name);
+                }
+            });
+
         });
     </script>
 </body>

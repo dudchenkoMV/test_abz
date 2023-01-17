@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Intervention\Image\Facades\Image;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Employee>
@@ -24,11 +25,11 @@ class EmployeeFactory extends Factory
 
         return [
             'position_id' => Position::all()->random(),
-            'name' => fake()->unique()->name(),
+            'name' => fake()->name(),
             'employment_at' => fake()->date(),
-            'phone' => $faker->unique()->e164PhoneNumber(),
-            'email' => fake()->unique()->safeEmail(),
-            'salary' => fake()->randomFloat(0, 100, 500),
+            'phone' => $faker->e164PhoneNumber(),
+            'email' => fake()->safeEmail(),
+            'salary' => fake()->randomFloat(0, 1, 500),
             'admin_created_id' => $admin->id,
             'admin_updated_id' => $admin->id,
         ];

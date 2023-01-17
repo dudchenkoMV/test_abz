@@ -18,38 +18,56 @@
                     <h2 class="card-title">{{ __('Edit employee') }}</h2>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('employees.update', $employee) }}" method="POST">
+                    <form action="{{ route('employees.update', $employee) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="photo">{{ __('Photo') }}</label>
+                            <label for="photo">
+                                @error('photo')
+                                <i class="far fa-times-circle text-red"></i>
+                                @enderror
+                                {{ __('Photo') }}
+                            </label>
                             @if($employee->photo)
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <img src="{{ asset('uploads/' . $employee->photo) }}" alt="{{ __('Employee photo') }}" width="300" height="300">
+                                        <img src="{{ asset($employee->photo) }}" alt="{{ __('Employee photo') }}" width="300" height="300">
                                     </div>
                                 </div>
                             @endif
                             <div class="row mt-3">
                                 <div class="col-md-5">
-                                    <button id="photo_button" class="btn btn-outline-secondary btn-block" type="button">{{ __('Browse') }}</button>
-                                    <input id="photo_input" class="form-control-file" type="file" id="photo" name="photo" hidden>
+                                    <button id="photo_button" class="btn btn-outline-secondary btn-block" type="button">{{ __('Upload photo') }}</button>
+                                    <input id="photo_input" class="form-control-file" type="file" name="photo" hidden>
+                                </div>
+                                <div class="col-md-7">
+                                    <span id="photo_caption" class="text-sm text-gray"></span>
                                 </div>
                             </div>
                             @error('photo')
-                            <div class="alert alert-warning">{{ $message }}</div>
+                            <div class="text-danger text-sm-left">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="name">{{ __('Name') }}</label>
-                            <input class="form-control" type="text" id="name" name="name" value="{{ $employee->name }}">
+                            <label for="name">
+                                @error('name')
+                                <i class="far fa-times-circle text-red"></i>
+                                @enderror
+                                {{ __('Name') }}
+                            </label>
+                            <input class="form-control @error('name') is-invalid  @enderror" type="text" id="name" name="name" value="{{ $employee->name }}">
                             @error('name')
-                            <div class="alert alert-warning">{{ $message }}</div>
+                            <div class="text-danger text-sm-left">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="phone">{{ __('Phone') }}</label>
-                            <input class="form-control"
+                            <label for="phone">
+                                @error('phone')
+                                <i class="far fa-times-circle text-red"></i>
+                                @enderror
+                                {{ __('Phone') }}
+                            </label>
+                            <input class="form-control @error('phone') is-invalid  @enderror"
                                    type="text"
                                    id="phone"
                                    name="phone"
@@ -59,32 +77,47 @@
                                    placeholder="+380 (XX) XXX XX XX"
                                    value="{{ $employee->phone }}">
                             @error('phone')
-                            <div class="alert alert-warning">{{ $message }}</div>
+                            <div class="text-danger text-sm-left">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="email">{{ __('Email') }}</label>
-                            <input class="form-control" type="email" id="email" name="email" value="{{ $employee->email }}">
+                            <label for="email">
+                                @error('email')
+                                <i class="far fa-times-circle text-red"></i>
+                                @enderror
+                                {{ __('Email') }}
+                            </label>
+                            <input class="form-control @error('email') is-invalid  @enderror" type="email" id="email" name="email" value="{{ $employee->email }}">
                             @error('email')
-                            <div class="alert alert-warning">{{ $message }}</div>
+                            <div class="text-danger text-sm-left">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="position_id">{{ __('Position') }}</label>
-                            <select class="form-control" name="position_id" id="position_id">
+                            <label for="position_id">
+                                @error('position_id')
+                                <i class="far fa-times-circle text-red"></i>
+                                @enderror
+                                {{ __('Position') }}
+                            </label>
+                            <select class="form-control @error('position_id') is-invalid  @enderror" name="position_id" id="position_id">
                                 @foreach($positions as $position)
                                     <option @if($position == $employee->position) selected @endif value="{{ $position->id }}">{{ $position->name }}</option>
                                 @endforeach
                             </select>
                             @error('position_id')
-                            <div class="alert alert-warning">{{ $message }}</div>
+                            <div class="text-danger text-sm-left">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="salary">{{ __('Salary, $') }}</label>
-                            <input class="form-control" type="text" id="salary" name="salary" value="{{ $employee->salary }}">
+                            <label for="salary">
+                                @error('salary')
+                                <i class="far fa-times-circle text-red"></i>
+                                @enderror
+                                {{ __('Salary, $') }}
+                            </label>
+                            <input class="form-control @error('salary') is-invalid  @enderror" type="text" id="salary" name="salary" value="{{ $employee->salary }}">
                             @error('salary')
-                            <div class="alert alert-warning">{{ $message }}</div>
+                            <div class="text-danger text-sm-left">{{ $message }}</div>
                             @enderror
                         </div>
                         {{--                <div class="form-group">--}}
@@ -95,10 +128,15 @@
                         {{--                    @enderror--}}
                         {{--                </div>--}}
                         <div class="form-group">
-                            <label for="employment_at">{{ __('Date of employment') }}</label>
-                            <input class="form-control" type="date" id="employment_at" name="employment_at" value="{{ $employee->employment_at }}">
+                            <label for="employment_at">
+                                @error('employment_at')
+                                <i class="far fa-times-circle text-red"></i>
+                                @enderror
+                                {{ __('Date of employment') }}
+                            </label>
+                            <input class="form-control datetimepicker-input  @error('employment_at') is-invalid  @enderror" type="date" id="employment_at" name="employment_at" value="{{ $employee->employment_at }}" data-target="#reservationdate" data-toggle="datetimepicker" placeholder="дд.мм.рр">
                             @error('employment_at')
-                            <div class="alert alert-warning">{{ $message }}</div>
+                            <div class="text-danger text-sm-left">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">

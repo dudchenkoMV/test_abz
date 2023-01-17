@@ -22,7 +22,7 @@ class EmployeeResource extends JsonResource
             'DT_RowData' => [
                 'pkey' => $this->id
             ],
-            'photo' => '<img src="' . asset('uploads/thumbnails/' . $this->photo) . '" width="80" height="80">',
+            'preview' => '<img src="' . asset($this->preview) . '" class="rounded-circle" width="50" height="50">',
             'name' => $this->name,
             'position' => $this->position,
             'employment_at' => $this->employment_at,
