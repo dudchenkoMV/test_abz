@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
-{{--    <link rel="stylesheet" href="{{ asset('adminlte/plugins/dropzone/min/dropzone.min.css') }}">--}}
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
 </head>
 <body>
@@ -25,7 +25,8 @@
     <script src="{{ asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/moment/moment.min.js') }}"></script>
-    <script src="//cdn.datatables.net/plug-ins/1.13.1/dataRender/datetime.js"></script>
+    <script src="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/dataRender/datetime.js') }}"></script>
     <script>
         $(function () {
             $('#employees-table').dataTable({
@@ -120,11 +121,10 @@
         $('#reservationdate').datetimepicker({
             format: 'DD.MM.YY',
         });
-    </script>
-    <script>
+
         $(function () {
             $('#photo_button').on('click', function() {
-               $('#photo_input').click();
+                $('#photo_input').click();
             });
             $('#photo_input').on('change', function() {
                 $('#photo_caption').text('');
@@ -132,7 +132,6 @@
                     $('#photo_caption').text(this.files[0].name);
                 }
             });
-
         });
     </script>
 </body>

@@ -21,13 +21,11 @@ class EmployeeFactory extends Factory
     {
         $admin = User::all()->random();
 
-        $faker = \Faker\Factory::create('uk_UA');
-
         return [
             'position_id' => Position::all()->random(),
             'name' => fake()->name(),
             'employment_at' => fake()->date(),
-            'phone' => $faker->e164PhoneNumber(),
+            'phone' => fake('uk_UA')->format('+380 (##) ### ## ##')->phoneNumber(),
             'email' => fake()->safeEmail(),
             'salary' => fake()->randomFloat(0, 1, 500),
             'admin_created_id' => $admin->id,

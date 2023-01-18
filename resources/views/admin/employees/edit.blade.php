@@ -134,7 +134,9 @@
                                 @enderror
                                 {{ __('Date of employment') }}
                             </label>
-                            <input class="form-control datetimepicker-input  @error('employment_at') is-invalid  @enderror" type="date" id="employment_at" name="employment_at" value="{{ $employee->employment_at }}" data-target="#reservationdate" data-toggle="datetimepicker" placeholder="дд.мм.рр">
+                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                <input class="form-control datetimepicker-input  @error('employment_at') is-invalid  @enderror" type="text" id="employment_at" name="employment_at" value="{{ \Illuminate\Support\Facades\Date::make($employee->employment_at)->format('dd.mm.yy') }}" data-target="#reservationdate" data-toggle="datetimepicker" placeholder="дд.мм.рр">
+                            </div>
                             @error('employment_at')
                             <div class="text-danger text-sm-left">{{ $message }}</div>
                             @enderror

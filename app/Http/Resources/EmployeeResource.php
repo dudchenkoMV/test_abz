@@ -17,12 +17,14 @@ class EmployeeResource extends JsonResource
      */
     public function toArray($request)
     {
+        $preview = $this->preview ? '<img src="' . asset($this->preview) . '" class="rounded-circle" width="50" height="50">' : '';
+
         return [
             'DT_RowId' => 'row_' . $this->id,
             'DT_RowData' => [
                 'pkey' => $this->id
             ],
-            'preview' => '<img src="' . asset($this->preview) . '" class="rounded-circle" width="50" height="50">',
+            'preview' => $preview,
             'name' => $this->name,
             'position' => $this->position,
             'employment_at' => $this->employment_at,
