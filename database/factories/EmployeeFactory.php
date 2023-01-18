@@ -25,7 +25,7 @@ class EmployeeFactory extends Factory
             'position_id' => Position::all()->random(),
             'name' => fake()->name(),
             'employment_at' => fake()->date(),
-            'phone' => fake('uk_UA')->format('+380 (##) ### ## ##')->phoneNumber(),
+            'phone' => fake('uk_UA')->e164PhoneNumber(),
             'email' => fake()->safeEmail(),
             'salary' => fake()->randomFloat(0, 1, 500),
             'admin_created_id' => $admin->id,

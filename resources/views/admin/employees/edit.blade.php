@@ -177,7 +177,3 @@
         </div>
     </div>
 @endsection
-
-@section('footer-script')
-
-@endsection
